@@ -1,26 +1,39 @@
 {% extends "polls/base.html" %}
 
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'polls/css/detailStyle.css' %}">
+{% endblock %}
+
 {% block title %}
 Detail
 {% endblock %}
 
 {% block content %}
-<form action="{% url 'polls:vote' question.id %}" method="POST">
-{% csrf_token %} {# Cross Site Request Forgery #}
-    <fieldset>
-        <legend>
-            <h1>{{ question.question_text }}</h1>
-        </legend>
-        {% if error_message %}
-            <p>
-                <strong>{{ error_message }}</strong>
-            </p>
-        {% endif %}
-        {% for choice in question.choice_set.all %}
-            <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
-            <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
-        {% endfor %}
-    </fieldset>
-    <input type="submit" value="Vote">
-</form>
+<main>
+    <div id="form-container">
+        <form action="{% url 'polls:vote' question.id %}" method="POST">
+        {% csrf_token %} {# Cross Site Request Forgery #}
+            <div id="question-text">
+                <h1>{{ question.question_text }}</h1>
+            </div>
+            <div>
+                {% if error_message %}
+                    <p class="error-msg">
+                        <strong>{{ error_message }}</strong>
+                    </p>
+                {% endif %}
+                {% for choice in question.choice_set.all %}
+                    <div class="choice-container">
+                        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+                        <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
+                    </div>
+                {% endfor %}
+            </div>
+            <div>
+                <input type="submit" value="Vote" id="btn-vote">
+            </div>
+        </form>
+    </div>
+</main>
 {% endblock  %}

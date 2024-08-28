@@ -56,7 +56,7 @@ def vote(request, question_id):
             'question': question,
             'error_message': 'Choice was not selected',
             }
-        return render(request, 'polls:detail', context)
+        return render(request, 'polls/detail.html', context)
     else:
         # Django uses the F() object to generate an SQL expression that
         # describes the required operation at the database level.

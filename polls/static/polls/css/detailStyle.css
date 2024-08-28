@@ -1,0 +1,41 @@
+#form-container {
+    width: 80%;
+    max-width: 400px;
+    padding: 2em 2.5em;
+    border-radius: 2em;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#question-text {
+    text-align: left;
+}
+
+.error-msg {
+    color: #b13737
+}
+
+#btn-vote {
+    width: 100%;
+    padding: 1em 2em;
+    border: none;
+    border-radius: 1em;
+    font-weight: bold;
+    margin-top: 1em;
+    background-color: #8BAA1A;
+    color: #fff;
+}
+
+#btn-vote:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: cubic-bezier();
+    transition-duration: 0.3s
+}
+
+.choice-container {
+    margin-bottom: 0.5em;
+}
+
+.choice-container label {
+    margin-left: 0.5em;
+}

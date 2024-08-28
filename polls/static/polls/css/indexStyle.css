@@ -1,0 +1,25 @@
+.question {
+    padding: 0;
+}
+
+.question li {
+    list-style-type: none;
+    margin-bottom: 2em;
+}
+
+.question li a {
+    display: inline-block;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 1em;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: #282C34;
+    width: 100%;
+    padding: 1em 1em;
+    text-decoration: none;
+    color: #fff;
+}
+
+.question li a:active {
+    background-color: #8BAA1A;
+}

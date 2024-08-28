@@ -1,16 +1,53 @@
 {% extends "polls/base.html" %}
 
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'polls/css/resultsStyle.css' %}">
+{% endblock  %}}
+
 {% block title %}
 Results
 {% endblock %}
 
 {% block content %}
-    <h1>{{ question.question_text }}</h1>
-    <ul>
-        {% for choice in question.choice_set.all %}
-            <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize}}</li>
-        {% endfor %}
-    </ul>
+    <main>
+        <div id="results-container">
+            <h1>{{ question.question_text }}</h1>
+            <ul>
+                {% for choice in question.choice_set.all %}
+                    <li>
+                        <div class="percentage" value="{{ choice.votes}}">
+                            <span>{{ choice.choice_text }}</span>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+            <nav>
+                <a href="{% url 'polls:detail' question.id %}" id="link-detail">Vote again?</a>
+                <a href="{% url 'polls:index' %}" id="link-home">Polls</a>
+            </nav>
+        </div>    
+    </main>
+    <script>
+        window.addEventListener("load", () => {
+            const p = document.getElementsByClassName("percentage");
+            let pollTotalVotes = 0;
+            let choiceVotes = 0;
+            for (let i = 0; i < p.length; i++) {
+                choiceVotes = p[i].getAttribute("value");
+                pollTotalVotes += Number.parseInt(choiceVotes);
+            }
 
-    <a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+            for (let i = 0; i < p.length; i++) {
+                choiceVotes = p[i].getAttribute("value");
+
+                let votesInPercentage = Math.round(choiceVotes/pollTotalVotes * 100) + "%";
+                p[i].style.width = votesInPercentage
+                
+                const spanElement = document.createElement("span") ;
+                spanElement.textContent = votesInPercentage
+                p[i].insertAdjacentElement("afterend", spanElement);
+            }
+        })
+    </script>
 {% endblock %}

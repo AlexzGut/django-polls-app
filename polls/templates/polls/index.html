@@ -1,17 +1,27 @@
 {% extends "polls/base.html" %}
 
+{% load static %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'polls/css/indexStyle.css' %}">
+{% endblock %}
+
 {% block title %}
 Home
 {% endblock %}
 
 {% block content %}
-    {% if latest_question_list %}
-        <ul>
-        {% for question in latest_question_list %}
-            <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
-        {% endfor %}    
-        </ul>
-    {% else %}
-        <p>No polls are available</p>
-    {% endif %}
+    <main>
+        <div>
+            <h1>Polls</h1>
+                {% if latest_question_list %}
+                    <ul class="question">
+                    {% for question in latest_question_list %}
+                        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+                    {% endfor %}    
+                    </ul>
+                {% else %}
+                    <p>No polls are available</p>
+                {% endif %}
+        </div>
+    </main>
 {% endblock %}
